@@ -19,6 +19,18 @@ pub fn Node(comptime T: type) type {
                 self.*.next = &Node(T).init(val);
             }
         }
+
+        pub fn format(self: *const Self, comptime fmt: []const u8, options: std.fmt.FormatOptions, writer: anytype) !void {
+            if (@TypeOf(self.val) == []const u8) try writer.print("{s} -> ", .{self.val})
+            else try writer.print("{d} -> ", .{self.val});
+            var hold = self;
+            while (hold.next) |next| {
+                if (@TypeOf(self.val) == []const u8) try writer.print("{s}", .{next.val})
+                else try writer.print("{d}", .{next.val});
+                if (next.next) |_| try writer.print(" -> ", .{});
+                hold = next;
+            }
+        }
     };
 }
 
