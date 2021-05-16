@@ -12,6 +12,16 @@ const Node = struct {
         return Self{ .val = val, .next = null, .allocator = allocator };
     }
 
+    fn fromList(list: []const i32, allocator: *std.mem.Allocator) anyerror!Self {
+        var ret = Self{ .val = list[0], .allocator = allocator, .next = null };
+
+        for (list[1..]) |item| {
+            try ret.append(item);
+        }
+
+        return ret;
+    }
+
     fn append(self: *Self, val: i32) anyerror!void {
         if (self.next) |next_node| {
             try next_node.append(val);
@@ -42,11 +52,12 @@ pub fn main() !void {
 
     const allocator = &arena.allocator;
 
-    var list = Node.init(5, allocator);
+    var list = try Node.fromList(&[_]i32{ 1, 2, 3, 4 }, allocator);
     defer list.deinit();
 
-    try list.append(6);
-    try list.append(7);
+    try list.append(5);
+
+    list.reverse();
 
     print("{}\n", .{list});
 }
