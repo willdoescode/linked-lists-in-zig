@@ -50,4 +50,3 @@ pub fn main() !void {
 
     print("{}\n", .{list});
 }
-
