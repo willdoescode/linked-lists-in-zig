@@ -25,9 +25,9 @@ const Node = struct {
 
     pub fn format(self: *const Self, comptime fmt: []const u8, options: std.fmt.FormatOptions, writer: anytype) !void {
         var cur = self;
-        try writer.print("{} ", .{self.val});
+        try writer.print("{}", .{self.val});
         while (cur.next) |next| : (cur = next) {
-            try writer.print("-> {} ", .{next.val});
+            try writer.print(" -> {}", .{next.val});
         }
     }
 
