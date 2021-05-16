@@ -57,7 +57,5 @@ pub fn main() !void {
 
     try list.append(5);
 
-    list.reverse();
-
     print("{}\n", .{list});
 }
