@@ -1,4 +1,3 @@
 # Linked Lists In Zig
 
-### Goals
-- All lists should be in place only
+![output](assets/output.png)
