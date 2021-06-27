@@ -88,4 +88,5 @@ pub fn main() !void {
     print("{}\n", .{list});
     print("{}\n", .{list.len});
     print("{}\n", .{list.at(5)});
+    print("{}\n", .{list.at(3_000_000)});
 }
